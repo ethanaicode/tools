@@ -1,0 +1,15 @@
+@charset "utf-8";
+body {
+  color: #666;
+  width: 100%;
+}
+blockquote {
+  margin: 0;
+  border-left: 4px solid #42b983;
+  padding: 2px 15px;
+  color: #777;
+  background-color: rgba(66, 185, 131, .1);
+}
+blockquote p {
+  margin: 10px 0;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>av号封面提取_bilibili封面提取_b站封面提取</title>
+<meta name="description" content="圆子工具_b站封面提取_bilibili封面提取_av号封面提取_本站是一个免费获取b站投稿封面的网站">
+<meta name="keywords" content="圆子工具,封面提取,封面获取,b站封面,bilibili封面,av号封面" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<!--[if lt IE 9]>
+	<script src="uploadify/html5.js" ></script>
+	<![endif]-->
+<script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script language="javascript" type="text/javascript" src="get.js"></script>
+<link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<link href="c.css" rel="stylesheet" />
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="https://tool.yzitc.com" class="brand">b站封面提取</a>
+<div class="nav-collapse collapse navbar-responsive-collapse">
+<ul class="nav pull-right">
+<li class="sharelogo">
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="body">
+<div class="row-fluid">
+<div class="logopic">
+</div>
+</div>
+<div class="container">
+<div id="container">
+<div class="row">
+<div class="span8 offset2">
+<div class="tabbable">
+<ul class="nav nav-tabs">
+<li class="active"><a href="#bilipic" data-toggle="tab">圆子工具_b站封面提取</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane active" id="bilipic">
+<form class="form-search">
+<input type="text" id="aid" name="aid" class="span6" placeholder="复制av/bv号到这里" />
+<input type="button" class="btn btn-primary" id="submit" name="submit" value="提取" />
+</form>
+<div class="shuoming"></div>
+<div class="info">输入av/bv号，点击“提取”按钮!不要使用回车键或输入法中的确定!</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+</div>
+</div>
+<div id="footer">
+<div id="copyright" class="container">
+<p class="muted credit">
+Copyright &copy; <a href="https://tool.yzitc.com" class="brand">圆子工具</a>, All Rights Reserved,Power by <a href="https://twitter.github.io/bootstrap/" target="_blank">bootstrap</a>,Design
+by <a href="https://tool.yzitc.com" class="brand">圆子工具</a>
+</p>
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#submit").click(function(){
+	   var magneturl = $("#aid")[0].value;
+	   var pd= magneturl.substr(0, 2);        
+         if(pd=='BV')
+        {
+        
+          bilibid(magneturl);
+        }else if(pd=='av'||pd=='aV'||pd=='Av'||pd=='AV')
+        {
+		  var aa=magneturl.substr(2);
+          biliaid(aa);
+        }else{
+		 biliaid(magneturl);
+		}
+      
+      // get  
+	});// click
+});// ready
+</script>
+</body>
+</html>
