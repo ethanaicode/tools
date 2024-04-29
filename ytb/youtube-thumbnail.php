@@ -16,7 +16,7 @@ function get_video_id($url)
 function log_data($data)
 {
     if (!empty($data)) {
-        $filename = "log.txt";
+        $filename = "video_url.log";
         $data = "[" . date('Y-m-d H:i:s') . "] " . $data . "\n";
         file_put_contents($filename, $data, FILE_APPEND);
     }
