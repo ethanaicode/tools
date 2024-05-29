@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+    <title>宽高比例计算器 Ratio Conversion Tool</title>
+    <script src="../../assets/js/tailwindcss@3.3.1.js"></script>
+  </head>
+  <body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-4">
+      <div class="container mx-auto text-center">
+        <h1 class="text-2xl font-bold">宽高比例计算器</h1>
+        <p>等比宽高比例计算转换器 Ratio Conversion Tool</p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center py-10">
+      <div class="container mx-auto space-y-8">
+        <!-- Explanation Card -->
+        <div class="bg-white p-8 rounded shadow-md">
+          <h2 class="text-xl font-bold mb-4">宽高比例计算器</h2>
+          <p class="leading-7">输入原来的宽高，并输入期待的宽，计算新的高</p>
+          <p class="leading-7 text-slate-500">
+            Calculate the new height based on the original width and height, and
+            the new width
+          </p>
+        </div>
+
+        <!-- Calculation Card -->
+        <div class="bg-white p-8 rounded shadow-md">
+          <form id="ratioForm" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <input
+                  type="number"
+                  id="value1"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  placeholder="width"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  id="value3"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  placeholder="new width"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  id="value2"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  placeholder="height"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  id="result"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 bg-gray-200 cursor-not-allowed"
+                  placeholder="new height"
+                  readonly
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-green-600 text-white py-2 px-4 rounded-md"
+            >
+              计算 Calculate
+            </button>
+          </form>
+        </div>
+
+        <!-- FAQ Card -->
+        <div class="bg-white p-8 rounded shadow-md">
+          <h2 class="text-xl font-bold mb-4 text-sky-500">
+            宽高比例计算器可以做什么
+          </h2>
+          <p class="leading-7">
+            当你知道一张原始图片的长宽比时，你希望将其缩放到一个新的宽度，这个工具可以帮助你计算新的高度。
+          </p>
+          <p class="leading-7 mb-4">
+            同时它也可以用于计算比例，比如1/4，转成9/16，这个工具可以帮助你计算出新的比例。
+          </p>
+          <p class="leading-7 text-slate-500">
+            When you know the aspect ratio of an original image, and you want to
+            scale it to a new width, this tool can help you calculate the new
+            height.
+          </p>
+          <p class="leading-7 text-slate-500">
+            It can also be used to calculate ratios, such as 1/4, converted to
+            9/16, this tool can help you calculate the new ratio.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4">
+      <div class="container mx-auto text-center">
+        <p>&copy; 2024 圆子工具-高比例计算器</p>
+      </div>
+    </footer>
+
+    <script>
+      document
+        .getElementById("ratioForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const value1 = parseFloat(document.getElementById("value1").value);
+          const value2 = parseFloat(document.getElementById("value2").value);
+          const value3 = parseFloat(document.getElementById("value3").value);
+
+          if (!isNaN(value1) && !isNaN(value2) && !isNaN(value3)) {
+            const result = (value2 * value3) / value1;
+            document.getElementById("result").value = result.toFixed(2);
+          }
+        });
+    </script>
+  </body>
+</html>
