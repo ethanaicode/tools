@@ -17,6 +17,10 @@
         color: white;
         border-radius: 8px;
       }
+      .color-white {
+        outline: 2px solid #c2c2c2;
+        outline-offset: -2px;
+      }
       .gradient {
         width: 320px;
         height: 200px;
@@ -31,43 +35,16 @@
     </style>
   </head>
   <body>
-    <div class="container container-colors">
-      <h1>Colors</h1>
-      <div class="box box-colors"></div>
-    </div>
     <div class="container container-gradient">
       <h1>Gradient</h1>
       <div class="box box-gradient"></div>
     </div>
+    <div class="container container-colors">
+      <h1>Colors</h1>
+      <div class="box box-colors"></div>
+    </div>
   </body>
   <script>
-    // 根据定义，遍历颜色值并插入到页面中
-    const colors = [
-      "#90839b",
-      "#536a49",
-      "#3a80a8",
-      "#5f879e",
-      "#13abbf",
-      "#283599",
-      "#028e85",
-      "#008da6",
-      "#36a4d6",
-      "#2983cc",
-      "#316bff",
-      "#1a73e8",
-      "white",
-    ];
-    const boxColors = document.querySelector(".box-colors");
-    colors.forEach((color) => {
-      const div = document.createElement("div");
-      div.className = "color";
-      div.style = `background-color: ${color};`;
-      boxColors.appendChild(div);
-      // 创建一个文字节点，显示颜色值
-      const text = document.createTextNode(color);
-      div.appendChild(text);
-    });
-
     // 根据定义，遍历渐变颜色值并插入到页面中
     const gradients = [
       "linear-gradient(344deg, #ffdca9 21%, #f5982a 92%)",
@@ -116,6 +93,47 @@
       } else {
         text = document.createTextNode(`${color_start} > ${color_end}`);
       }
+      div.appendChild(text);
+    });
+    // 根据定义，遍历颜色值并插入到页面中
+    const colors = [
+      "#90839b",
+      "#536a49",
+      "#3a80a8",
+      "#5f879e",
+      "#13abbf",
+      "#283599",
+      "#028e85",
+      "#008da6",
+      "#36a4d6",
+      "#2983cc",
+      "#316bff",
+      "#1a73e8",
+      "white",
+      "#c2c2c2",
+      "#1c1c1c",
+      "#7c4c1f",
+      "#ca3be2",
+      "#2e42d1",
+      "#29b571",
+      "#fbbc05",
+      "#ff701f",
+      "#f94a36",
+      "#e495c0",
+      "white",
+    ];
+    const boxColors = document.querySelector(".box-colors");
+    colors.forEach((color) => {
+      const div = document.createElement("div");
+      if (color == "white") {
+        div.className = "color color-white";
+      } else {
+        div.className = "color";
+      }
+      div.style = `background-color: ${color};`;
+      boxColors.appendChild(div);
+      // 创建一个文字节点，显示颜色值
+      const text = document.createTextNode(color);
       div.appendChild(text);
     });
   </script>
