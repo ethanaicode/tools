@@ -1,3 +1,4 @@
 .DS_Store
 /ytb/log.txt
 *.log
+*.bundle
