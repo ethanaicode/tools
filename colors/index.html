@@ -32,6 +32,16 @@
         color: white;
         border-radius: 8px;
       }
+      .scheme {
+        width: 420px;
+        height: 200px;
+        display: inline-block;
+        margin: 10px;
+        text-align: center;
+        line-height: 200px;
+        font-size: 20px;
+        border-radius: 8px;
+      }
     </style>
   </head>
   <body>
@@ -42,6 +52,10 @@
     <div class="container container-colors">
       <h1>Colors</h1>
       <div class="box box-colors"></div>
+    </div>
+    <div class="container container-Schemes">
+      <h1>Schemes</h1>
+      <div class="box box-Schemes"></div>
     </div>
   </body>
   <script>
@@ -97,6 +111,7 @@
       }
       div.appendChild(text);
     });
+
     // 根据定义，遍历颜色值并插入到页面中
     const colors = [
       "#90839b",
@@ -169,6 +184,24 @@
       boxColors.appendChild(div);
       // 创建一个文字节点，显示颜色值
       const text = document.createTextNode(color);
+      div.appendChild(text);
+    });
+
+    // 根据定义，遍历颜色值并插入到页面中
+    const Schemes = [
+      { foreground: "#00C273", background: "#141729" },
+      { foreground: "#00B113", background: "#1E1B33" },
+    ];
+    const boxSchemes = document.querySelector(".box-Schemes");
+    Schemes.forEach((scheme) => {
+      const div = document.createElement("div");
+      div.className = "scheme";
+      div.style = `background-color: ${scheme.background}; color: ${scheme.foreground};`;
+      boxSchemes.appendChild(div);
+      // 创建一个文字节点，显示颜色值
+      const text = document.createTextNode(
+        `${scheme.foreground} > ${scheme.background}`
+      );
       div.appendChild(text);
     });
   </script>
