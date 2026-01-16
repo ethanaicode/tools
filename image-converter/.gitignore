@@ -1,0 +1,20 @@
+# Ignore uploaded files
+public/uploads/original/*
+public/uploads/converted/*
+
+# Keep directory structure
+!public/uploads/original/.gitkeep
+!public/uploads/converted/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log

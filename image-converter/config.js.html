@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置基础路径</title>
+</head>
+<body>
+    <script>
+        // 自动检测基础路径
+        const currentPath = window.location.pathname;
+        const basePath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+        
+        // 设置全局配置
+        window.APP_CONFIG = {
+            basePath: basePath || '',
+            apiUrl: basePath + '/upload.php'
+        };
+    </script>
+</body>
+</html>
