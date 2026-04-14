@@ -20,11 +20,11 @@
     <meta property="og:image" content="https://tool.yzitc.com/favicon.ico" />
     <meta
       name="keywords"
-      content="圆子工具箱,开发人员工具,YouTube封面提取,B站封面提取,SBTI测试,MBTI人格测试,性格测试,图片转换工具,HEIC转JPG,宽高比例计算器,渐变色工具,代码格式化,进制转换,二维码,json格式化,照片压缩,pdf合并,在线工具"
+      content="圆子工具箱,开发人员工具,访问者信息查询,IP地址查询,User-Agent查询,HTTP请求头,YouTube封面提取,B站封面提取,SBTI测试,MBTI人格测试,性格测试,图片转换工具,HEIC转JPG,宽高比例计算器,渐变色工具,代码格式化,进制转换,二维码,json格式化,照片压缩,pdf合并,在线工具"
     />
     <meta
       name="description"
-      content="圆子工具箱 - 免费在线工具集合，包含YouTube封面提取、B站封面提取、SBTI性格测试、图片格式转换（HEIC转JPG）、宽高比例计算器、渐变色收集等实用工具。简单易用，无需下载安装。"
+      content="圆子工具箱 - 免费在线工具集合，包含访问者信息查询（IP地址、User-Agent）、YouTube封面提取、B站封面提取、SBTI性格测试、图片格式转换（HEIC转JPG）、宽高比例计算器、渐变色收集等实用工具。简单易用，无需下载安装。"
     />
     <link rel="canonical" href="https://tool.yzitc.com/" />
     <meta name="robots" content="index, follow" />
@@ -48,7 +48,7 @@
       "@type": "WebSite",
       "name": "圆子工具箱",
       "url": "https://tool.yzitc.com/",
-      "description": "免费在线工具集合，包含YouTube封面提取、B站封面提取、SBTI性格测试、图片格式转换等实用工具",
+      "description": "免费在线工具集合，包含访问者信息查询、YouTube封面提取、B站封面提取、SBTI性格测试、图片格式转换等实用工具",
       "publisher": {
         "@type": "Organization",
         "name": "设计笔记",
@@ -69,41 +69,48 @@
         {
           "@type": "ListItem",
           "position": 1,
+          "name": "访问者信息查询工具",
+          "url": "https://tool.yzitc.com/visitor-info/",
+          "description": "查看访问者IP地址、User-Agent、浏览器信息、HTTP请求头等详细信息"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
           "name": "油管视频封面提取工具",
           "url": "https://tool.yzitc.com/ytb/",
           "description": "YouTube视频封面提取工具，快速获取高清封面图片"
         },
         {
           "@type": "ListItem",
-          "position": 2,
+          "position": 3,
           "name": "宽高比例计算器",
           "url": "https://tool.yzitc.com/math/scale/",
           "description": "在线图片宽高比例计算工具"
         },
         {
           "@type": "ListItem",
-          "position": 3,
+          "position": 4,
           "name": "颜色渐变色收集",
           "url": "https://tool.yzitc.com/colors/",
           "description": "渐变色和纯色收集工具，方便设计师使用"
         },
         {
           "@type": "ListItem",
-          "position": 4,
+          "position": 5,
           "name": "图片转换工具",
           "url": "https://tool.yzitc.com/image-converter/",
           "description": "支持HEIC转JPG等多种图片格式转换，批量处理"
         },
         {
           "@type": "ListItem",
-          "position": 5,
+          "position": 6,
           "name": "B站封面提取",
           "url": "https://tool.yzitc.com/bili/",
           "description": "哔哩哔哩视频封面提取工具"
         },
         {
           "@type": "ListItem",
-          "position": 6,
+          "position": 7,
           "name": "SBTI测试",
           "url": "https://tool.yzitc.com/sbti/",
           "description": "SBTI性格测试，比MBTI更有趣的人格测试"
@@ -127,6 +134,19 @@
           <h2 class="text-2xl font-bold mb-2">自制工具</h2>
         </section>
         <section class="bg-white rounded-md p-4 mb-4">
+          <h3 class="text-lg font-medium mb-2">
+            <a
+              href="https://tool.yzitc.com/visitor-info/"
+              class="text-blue-600 hover:text-blue-800"
+              >访问者信息查询工具</a
+            >
+          </h3>
+          <p class="text-gray-700 mb-2">
+            实时查看您的IP地址、User-Agent、Referer、浏览器信息、操作系统、屏幕分辨率等详细的访问者信息和HTTP请求头信息。
+          </p>
+          <p class="text-gray-700 mb-2">
+            支持手机和电脑访问，界面简洁清晰，信息一目了然。方便开发者调试和了解访问者的设备与网络环境。
+          </p>
           <h3 class="text-lg font-medium mb-2">
             <a
               href="https://tool.yzitc.com/ytb/"

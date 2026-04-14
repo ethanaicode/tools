@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <title>访问者信息查询工具 - 查看您的IP地址、User-Agent等信息 | 圆子工具箱</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="author" content="https://www.shejibiji.com" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:title" content="访问者信息查询工具 - 圆子工具箱" />
+    <meta property="og:site_name" content="圆子工具箱" />
+    <meta
+      property="og:description"
+      content="免费在线访问者信息查询工具，实时显示您的IP地址、User-Agent、Referer、浏览器信息、操作系统、屏幕分辨率等详细信息。支持手机和电脑访问。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tool.yzitc.com/visitor-info/" />
+    <meta property="og:image" content="https://tool.yzitc.com/favicon.ico" />
+    <meta
+      name="keywords"
+      content="IP地址查询,User-Agent查询,访问者信息,浏览器信息,HTTP头信息,Referer查询,在线IP查询,我的IP地址,浏览器指纹,设备信息"
+    />
+    <meta
+      name="description"
+      content="访问者信息查询工具 - 免费在线查看您的IP地址、User-Agent、Referer、浏览器类型、操作系统、屏幕分辨率、语言设置等详细的访问者信息和HTTP请求头信息。"
+    />
+    <link rel="canonical" href="https://tool.yzitc.com/visitor-info/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="访问者信息查询工具 - 圆子工具箱" />
+    <meta name="twitter:description" content="免费查看您的IP地址、User-Agent等详细访问者信息" />
+    <meta name="twitter:image" content="https://tool.yzitc.com/favicon.ico" />
+    <meta name="apple-mobile-web-app-title" content="访问者信息查询" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="grey" />
+    <script src="../assets/js/tailwindcss@3.3.1.js"></script>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "访问者信息查询工具",
+      "url": "https://tool.yzitc.com/visitor-info/",
+      "description": "免费在线访问者信息查询工具，实时显示IP地址、User-Agent、浏览器信息等",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CNY"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "设计笔记",
+        "url": "https://www.shejibiji.com"
+      }
+    }
+    </script>
+    <style>
+      .info-card {
+        transition: all 0.3s ease;
+      }
+      .info-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(59, 130, 246, 0.3);
+        border-radius: 50%;
+        border-top-color: #3b82f6;
+        animation: spin 1s ease-in-out infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      .info-label {
+        font-weight: 600;
+        color: #374151;
+        min-width: 140px;
+      }
+      .info-value {
+        color: #1f2937;
+        word-break: break-all;
+        font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+        background: #f3f4f6;
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+      @media (max-width: 768px) {
+        .info-label {
+          min-width: 100px;
+          font-size: 14px;
+        }
+        .info-value {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <header class="bg-white shadow-sm">
+      <div class="container mx-auto px-4 py-4">
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 text-center">
+          访问者信息查询工具
+        </h1>
+        <p class="text-center text-gray-600 mt-2">实时查看您的浏览器和网络信息</p>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <!-- 加载提示 -->
+      <div id="loading" class="text-center py-8">
+        <div class="loading mx-auto"></div>
+        <p class="text-gray-600 mt-4">正在获取访问者信息...</p>
+      </div>
+
+      <!-- 主要信息区域 -->
+      <div id="mainInfo" class="hidden">
+        <!-- IP地址高亮显示 -->
+        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg p-6 md:p-8 mb-6 text-white">
+          <h2 class="text-lg md:text-xl font-semibold mb-2">您的IP地址</h2>
+          <p id="ipAddress" class="text-3xl md:text-5xl font-bold">--</p>
+        </div>
+
+        <!-- 基本信息 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6 info-card">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-blue-500">
+            基本信息
+          </h2>
+          <div class="space-y-3">
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">User-Agent:</span>
+              <span id="userAgent" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">来源页面 (Referer):</span>
+              <span id="referer" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">请求时间:</span>
+              <span id="requestTime" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 浏览器客户端信息 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6 info-card">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-green-500">
+            浏览器与设备信息
+          </h2>
+          <div class="space-y-3">
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">浏览器:</span>
+              <span id="browser" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">操作系统:</span>
+              <span id="os" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">设备类型:</span>
+              <span id="deviceType" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">屏幕分辨率:</span>
+              <span id="screenResolution" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">浏览器窗口:</span>
+              <span id="viewportSize" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">色彩深度:</span>
+              <span id="colorDepth" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">语言设置:</span>
+              <span id="language" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">时区:</span>
+              <span id="timezone" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">Cookie启用:</span>
+              <span id="cookieEnabled" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">在线状态:</span>
+              <span id="onlineStatus" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 网络与协议信息 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6 info-card">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-purple-500">
+            网络与协议信息
+          </h2>
+          <div class="space-y-3">
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">协议版本:</span>
+              <span id="protocol" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">请求方法:</span>
+              <span id="requestMethod" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">主机名:</span>
+              <span id="host" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">端口:</span>
+              <span id="port" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">接受语言:</span>
+              <span id="acceptLanguage" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">接受编码:</span>
+              <span id="acceptEncoding" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-start">
+              <span class="info-label">连接类型:</span>
+              <span id="connection" class="info-value flex-1 mt-1 md:mt-0 md:ml-4">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 所有HTTP请求头 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6 info-card">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-orange-500">
+            所有HTTP请求头
+          </h2>
+          <div id="allHeaders" class="space-y-2">
+            <!-- 动态填充 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 返回首页 -->
+      <div class="text-center mt-8">
+        <a
+          href="../"
+          class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-all"
+        >
+          返回工具箱首页
+        </a>
+      </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12">
+      <div class="container mx-auto px-4 py-6">
+        <p class="text-center text-gray-600">
+          圆子工具箱 ©2014-2024
+          <a
+            href="https://www.shejibiji.com"
+            class="text-blue-600 hover:text-blue-800"
+            rel="noopener noreferrer"
+          >
+            设计笔记 shejibiji
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // 解析User-Agent获取浏览器信息
+      function getBrowserInfo(ua) {
+        let browser = '未知浏览器';
+        if (ua.indexOf('Firefox') > -1) {
+          browser = 'Mozilla Firefox';
+        } else if (ua.indexOf('Edg') > -1) {
+          browser = 'Microsoft Edge';
+        } else if (ua.indexOf('Chrome') > -1) {
+          browser = 'Google Chrome';
+        } else if (ua.indexOf('Safari') > -1) {
+          browser = 'Apple Safari';
+        } else if (ua.indexOf('Opera') > -1 || ua.indexOf('OPR') > -1) {
+          browser = 'Opera';
+        } else if (ua.indexOf('MSIE') > -1 || ua.indexOf('Trident') > -1) {
+          browser = 'Internet Explorer';
+        }
+        return browser;
+      }
+
+      // 解析User-Agent获取操作系统
+      function getOSInfo(ua) {
+        let os = '未知系统';
+        if (ua.indexOf('Windows NT 10.0') > -1) os = 'Windows 10/11';
+        else if (ua.indexOf('Windows NT 6.3') > -1) os = 'Windows 8.1';
+        else if (ua.indexOf('Windows NT 6.2') > -1) os = 'Windows 8';
+        else if (ua.indexOf('Windows NT 6.1') > -1) os = 'Windows 7';
+        else if (ua.indexOf('Windows') > -1) os = 'Windows';
+        else if (ua.indexOf('Mac OS X') > -1) os = 'macOS';
+        else if (ua.indexOf('Android') > -1) os = 'Android';
+        else if (ua.indexOf('Linux') > -1) os = 'Linux';
+        else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) os = 'iOS';
+        return os;
+      }
+
+      // 获取设备类型
+      function getDeviceType(ua) {
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+          return '平板设备';
+        } else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+          return '移动设备';
+        }
+        return '桌面设备';
+      }
+
+      // 获取访问者信息
+      async function fetchVisitorInfo() {
+        try {
+          const response = await fetch('./api.php');
+          const data = await response.json();
+          
+          // 隐藏加载提示
+          document.getElementById('loading').classList.add('hidden');
+          document.getElementById('mainInfo').classList.remove('hidden');
+          
+          // 填充服务器端信息
+          document.getElementById('ipAddress').textContent = data.ip || '无法获取';
+          document.getElementById('userAgent').textContent = data.user_agent || '未知';
+          document.getElementById('referer').textContent = data.referer || '直接访问';
+          document.getElementById('requestTime').textContent = data.request_time || '--';
+          document.getElementById('protocol').textContent = data.protocol || '--';
+          document.getElementById('requestMethod').textContent = data.request_method || '--';
+          document.getElementById('host').textContent = data.host || '--';
+          document.getElementById('port').textContent = data.server_port || '--';
+          document.getElementById('acceptLanguage').textContent = data.accept_language || '--';
+          document.getElementById('acceptEncoding').textContent = data.accept_encoding || '--';
+          document.getElementById('connection').textContent = data.connection || '--';
+          
+          // 填充客户端信息
+          const ua = navigator.userAgent;
+          document.getElementById('browser').textContent = getBrowserInfo(ua);
+          document.getElementById('os').textContent = getOSInfo(ua);
+          document.getElementById('deviceType').textContent = getDeviceType(ua);
+          document.getElementById('screenResolution').textContent = 
+            `${screen.width} × ${screen.height} 像素`;
+          document.getElementById('viewportSize').textContent = 
+            `${window.innerWidth} × ${window.innerHeight} 像素`;
+          document.getElementById('colorDepth').textContent = `${screen.colorDepth} 位`;
+          document.getElementById('language').textContent = navigator.language || '--';
+          document.getElementById('timezone').textContent = 
+            `UTC${new Date().getTimezoneOffset() > 0 ? '-' : '+'}${Math.abs(new Date().getTimezoneOffset() / 60)}`;
+          document.getElementById('cookieEnabled').textContent = 
+            navigator.cookieEnabled ? '是' : '否';
+          document.getElementById('onlineStatus').textContent = 
+            navigator.onLine ? '在线' : '离线';
+          
+          // 填充所有HTTP请求头
+          const headersContainer = document.getElementById('allHeaders');
+          if (data.all_headers && Object.keys(data.all_headers).length > 0) {
+            for (const [key, value] of Object.entries(data.all_headers)) {
+              const headerDiv = document.createElement('div');
+              headerDiv.className = 'flex flex-col md:flex-row md:items-start py-2 border-b border-gray-100';
+              headerDiv.innerHTML = `
+                <span class="info-label">${key}:</span>
+                <span class="info-value flex-1 mt-1 md:mt-0 md:ml-4">${value}</span>
+              `;
+              headersContainer.appendChild(headerDiv);
+            }
+          } else {
+            headersContainer.innerHTML = '<p class="text-gray-500">无请求头信息</p>';
+          }
+          
+        } catch (error) {
+          console.error('获取访问者信息失败:', error);
+          document.getElementById('loading').innerHTML = 
+            '<p class="text-red-600">获取信息失败，请刷新页面重试</p>';
+        }
+      }
+
+      // 页面加载时获取信息
+      window.addEventListener('DOMContentLoaded', fetchVisitorInfo);
+
+      // 窗口大小改变时更新视口信息
+      window.addEventListener('resize', function() {
+        document.getElementById('viewportSize').textContent = 
+          `${window.innerWidth} × ${window.innerHeight} 像素`;
+      });
+    </script>
+  </body>
+</html>
